@@ -1,0 +1,97 @@
+#include <iostream>
+#include <string>
+#include <limits> // Required for numeric_limits
+using namespace std;
+
+// Function to validate the score entries
+int getValidScore(const string& subject) {
+    int score;
+    while (true) {
+        cout << "Enter score for " << subject << " (0-100): ";
+        cin >> score;
+
+        // Check if score is valid
+        if (score >= 0 && score <= 100) {
+            break; // Exit the loop if the score is valid
+        } else {
+            cout << "Invalid score! Please enter a score between 0 and 100." << endl;
+        }
+
+        // Clear the input buffer to handle invalid input
+        cin.clear(); // Clear the error flag
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
+    }
+    return score;
+}
+
+// Function to determine the grade based on the score
+string getGrade(int score) {
+    if (score >= 75) {
+        return "A+";
+    } else if (score >= 60) {
+        return "A";
+    } else if (score >= 50) {
+        return "B+";
+    } else if (score >= 40) {
+        return "B";
+    } else {
+        return "FAIL";
+    }
+}
+
+int main() {
+    // Declare variables
+    string NameOfStudent, IndexNo, Department;
+    string CPS103_gpa, CPS109_gpa, CPS111_gpa, AFS111_gpa, EEE109_gpa, CMS111_gpa, STA101_gpa;
+
+    // Accept student details
+    cout << "Enter Name: ";
+    getline(cin, NameOfStudent);
+
+    cout << "Enter IndexNo: ";
+    getline(cin, IndexNo);
+
+    cout << "Enter Department: ";
+    getline(cin, Department);
+
+    // Accept and validate scores for all subjects
+    int CPS103 = getValidScore("CPS103");
+    int CPS109 = getValidScore("CPS109");
+    int CPS111 = getValidScore("CPS111");
+    int EEE109 = getValidScore("EEE109");
+    int CMS111 = getValidScore("CMS111");
+    int STA101 = getValidScore("STA101");
+    int AFS111 = getValidScore("AFS111");
+
+    // Determine grades for all subjects
+    CPS103_gpa = getGrade(CPS103);
+    CPS109_gpa = getGrade(CPS109);
+    CPS111_gpa = getGrade(CPS111);
+    EEE109_gpa = getGrade(EEE109);
+    CMS111_gpa = getGrade(CMS111);
+    STA101_gpa = getGrade(STA101);
+    AFS111_gpa = getGrade(AFS111);
+
+    // Display results
+    cout << "***********************************************************" << endl;
+    cout << "ACCRA TECHNICAL UNIVERSITY STUDENT'S SEMESTER RESULTS______" << endl;
+    cout << "___________________________________________________________" << endl;
+    cout << "***********************************************************" << endl;
+
+    cout << "Student Name : " << NameOfStudent << endl;
+    cout << "IndexNo      : " << IndexNo << endl;
+    cout << "Department   : " << Department << endl;
+
+    cout << "___________________________________________________________" << endl;
+    cout << "***********************************************************" << endl;
+
+    cout << "CPS103 GRADE : " << CPS103_gpa << endl;
+    cout << "CPS109 GRADE : " << CPS109_gpa << endl;
+    cout << "CPS111 GRADE : " << CPS111_gpa << endl;
+    cout << "EEE109 GRADE : " << EEE109_gpa << endl;
+    cout << "CMS111 GRADE : " << CMS111_gpa << endl;
+    cout << "STA101 GRADE : " << STA101_gpa << endl;
+    cout << "AFS111 GRADE : " << AFS111_gpa << endl;
+
+    return 0;
+}
